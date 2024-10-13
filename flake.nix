@@ -1,1 +1,4 @@
-{ outputs = { self } : name : builtins.concatStringsSep "" [ "$" "{" ( builtins.toString name ) "}" ] ; }
+{
+    inputs = { } ;
+    outputs = { self } : { lib = name : builtins.concatStringsSep "" [ "$" "{" ( builtins.toString name ) "}" ] ; } ;
+}
