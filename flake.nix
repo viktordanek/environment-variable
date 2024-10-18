@@ -28,11 +28,9 @@
                                                             expected='${ builtins.concatStringsSep "" [ "$" "{" "myVar" "}" ] }' &&
                                                             if [ "$observed != "$expected" ]
                                                             then
-                                                                ${ pkgs.coreutils }/bin/echo "Test failed: expected \"$expected\" but got \"$result\"" &&
                                                                     exit 1
                                                             else
-                                                                ${ pkgs.coreutils }/bin/mkdir $out &&
-                                                                    ${ pkgs.coreutils }/bin/echo "Test passed: $result"
+                                                                ${ pkgs.coreutils }/bin/mkdir $out
                                                             fi
                                                     ''
                                                 ] ;
