@@ -17,4 +17,4 @@ jobs:
       - name: Verify Nix installation
         run: /home/runner/.nix-profile/bin/nix --version  # Check if Nix is available
       - name: Run Nix Flake Check
-        run: /home/runner/.nix-profile/bin/nix --extra-experimental-features nix-command flake check
+        run: /home/runner/.nix-profile/bin/nix --extra-experimental-features nix-command --extra-experimental-features flakes flake check
