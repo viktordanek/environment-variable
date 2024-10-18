@@ -15,4 +15,4 @@ jobs:
           curl -L https://nixos.org/nix/install | sh
           source ~/.nix-profile/etc/profile.d/nix.sh
       - name: Run Nix Flake Check
-        run: timeout nix flake check
+        run: timeout 60 nix flake check
