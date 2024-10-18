@@ -5,6 +5,8 @@ on:
   workflow_dispatch: # Allows manual triggering of the workflow as well
 jobs:
   update-flake:
+    env:
+      GH_TOKEN: ${{ secrets.UPDATER_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
