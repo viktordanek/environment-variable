@@ -41,7 +41,7 @@ jobs:
 
             # Push the changes using the GH_TOKEN
             git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/viktordanek/environment-variable.git HEAD
-            gh pr create --title "Update flake dependencies" --body "This PR updates flake-utils and nixpkgs to their latest versions."
+            gh pr create --head --title "Update flake dependencies" --body "This PR updates flake-utils and nixpkgs to their latest versions."
           else
             echo "No updates found. Skipping."
           fi
