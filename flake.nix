@@ -24,9 +24,9 @@
                                                 [
                                                     "-c"
                                                     ''
-                                                        observed='${lib "myVar"}' &&
+                                                        observed='${ lib "myVar" }' &&
                                                             expected='${ builtins.concatStringsSep "" [ "$" "{" "myVar" "}" ] }' &&
-                                                            if [ "$observed != "$expected" ]
+                                                            if [ "$observed" != "$expected" ]
                                                             then
                                                                     exit 1
                                                             else
