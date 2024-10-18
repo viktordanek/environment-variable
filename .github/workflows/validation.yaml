@@ -15,6 +15,6 @@ jobs:
           curl -L https://nixos.org/nix/install | sh
           source ~/.nix-profile/etc/profile.d/nix.sh
       - name: Verify Nix installation
-        run: nix --version  # Check if Nix is available
+        run: /home/runner/.nix-profile/bin/nix --version  # Check if Nix is available
       - name: Run Nix Flake Check
-        run: nix flake check
+        run: /home/runner/.nix-profile/bin/nix flake check
