@@ -22,28 +22,19 @@ jobs:
 
       - name: Update flake dependencies
         run: |
-          # Fetch latest versions of nixpkgs and flake-utils
-          nix flake lock --update-input nixpkgs --update-input flake-utils
-
-          # Check if the lock file was updated
-          if [[ -n $(git status --porcelain) ]]; then
-            echo "New versions found. Running nix flake check..."
-
-            BRANCH=scratch/$(uuidgen)
-            git checkout -b ${BRANCH}
-            # Run nix flake check to ensure the new dependencies work
-            nix flake check
-
-            # Commit the updated flake.lock if check passes
-            git config --global user.name "github-actions[bot]"
-            git config --global user.email "github-actions[bot]@users.noreply.github.com"
-            git add flake.lock
-            git commit -m "Update flake-utils and nixpkgs to latest versions"
-
-            # Push the changes using the GH_TOKEN
-            git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/viktordanek/environment-variable.git HEAD
-            gh pr create base main --head ${BRANCH} --title "Update flake dependencies" --body "This PR updates flake-utils and nixpkgs to their latest versions."
-          else
-            echo "No updates found. Skipping."
-          fi
+          nix flake lock --update-input nixpkgs --update-input flake-utils &&
+            if [[ -n $(git status --porcelain) ]]
+            then
+              nix flake check &&
+                BRANCH=scratch/$(uuidgen) &&
+                git checkout -b ${BRANCH} &&
+                git config --global user.name "github-actions[bot]" &&
+                git config --global user.email "github-actions[bot]@users.noreply.github.com" &&
+                git add flake.lock &&
+                git commit -m "Update flake-utils and nixpkgs to latest versions" &&
+                git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/viktordanek/environment-variable.git HEAD &&
+                gh pr create --base main --head ${BRANCH} --title "Update flake dependencies" --body "This PR updates flake-utils and nixpkgs to their latest versions."
+            else
+              echo "No updates found. Skipping."
+            fi
           
