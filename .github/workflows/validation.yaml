@@ -14,5 +14,7 @@ jobs:
         run: |
           curl -L https://nixos.org/nix/install | sh
           source ~/.nix-profile/etc/profile.d/nix.sh
+      - name: Verify Nix installation
+        run: nix --version  # Check if Nix is available
       - name: Run Nix Flake Check
-        run: timeout 60 nix flake check
+        run: nix flake check
