@@ -29,7 +29,7 @@ jobs:
           if [[ -n $(git status --porcelain) ]]; then
             echo "New versions found. Running nix flake check..."
 
-            git checkout scratch/$(uuidgen)
+            git checkout -b scratch/$(uuidgen)
             # Run nix flake check to ensure the new dependencies work
             nix flake check
 
