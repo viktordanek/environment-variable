@@ -25,7 +25,7 @@ jobs:
               git add flake.lock &&
               git checkout -b scratch/$(uuidgen) &&
               git commit -am "Update flake-utils and nixpkgs to latest versions" &&
-              git push origin HEAD &&      
+              git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/viktordanek/environment-variable.git HEAD &&      
               gh pr create --title "Update flake dependencies" --body "This PR updates flake-utils and nixpkgs to their latest versions."
           else
             echo "No updates found. Skipping."
