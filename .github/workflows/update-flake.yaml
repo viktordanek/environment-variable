@@ -23,8 +23,9 @@ jobs:
               git config --global user.name "github-actions[bot]" &&
               git config --global user.email "github-actions[bot]@users.noreply.github.com" &&
               git add flake.lock &&
-              git commit -m "Update flake-utils and nixpkgs to latest versions" &&
-              git push origin HEAD:updates/flake-deps &&      
+              git checkout -b scratch/$(uuidgen) &&
+              git commit -am "Update flake-utils and nixpkgs to latest versions" &&
+              git push origin HEAD &&      
               gh pr create --title "Update flake dependencies" --body "This PR updates flake-utils and nixpkgs to their latest versions."
           else
             echo "No updates found. Skipping."
